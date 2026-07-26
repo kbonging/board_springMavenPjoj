@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
@@ -15,6 +15,7 @@ $(document).ready(function(){
 	        $("#deleteForm").submit();
 	    }
 	});
+	
 	
 });
 </script>
@@ -47,15 +48,18 @@ $(document).ready(function(){
 				<td>${board.content}</td>
 			</tr>
 		</table>
-		
+
 		<form id="deleteForm" action="/board/delete" method="post">
-		    <input type="hidden" name="boardId" value="${board.boardId}">
+			<input type="hidden" name="boardId" value="${board.boardId}">
 		</form>
-		
+
 		<div class="text-end">
 			<a href="/board/list" class="btn btn-secondary"> 목록 </a>
-			<button id="btnUpdate" class="btn btn-warning">수정</button>
-			<button id="btnDelete" class="btn btn-danger">삭제</button>
+			
+			<c:if test="${not empty sessionScope.loginMember and sessionScope.loginMember.memberId == board.writer}">
+				<button id="btnUpdate" class="btn btn-warning">수정</button>
+				<button id="btnDelete" class="btn btn-danger">삭제</button>
+			</c:if>
 		</div>
 	</div>
 </div>

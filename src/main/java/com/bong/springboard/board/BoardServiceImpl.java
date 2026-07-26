@@ -24,11 +24,17 @@ public class BoardServiceImpl implements BoardService {
     /** 게시물 조회 */
     @Override
     public BoardDTO getBoard(Long boardId) {
-        // 조회수 증가
-        boardDAO.updateViewCount(boardId);
         return boardDAO.selectBoard(boardId);
     }
 
+    /** 게시글 상세페이지 조회*/
+    @Override
+    public BoardDTO getBoardDetail(Long boardId) {
+    	// 조회수 증가
+    	boardDAO.updateViewCount(boardId);
+    	return boardDAO.selectBoard(boardId);
+    }
+    
 	@Override
 	public int insertBoard(BoardDTO boardDTO) {
 		return boardDAO.insertBoard(boardDTO);
@@ -43,4 +49,5 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(BoardDTO boardDTO) {
 		return boardDAO.deleteBoard(boardDTO);
 	}
+
 }
